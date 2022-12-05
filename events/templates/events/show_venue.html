@@ -1,0 +1,41 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-header">
+            Venue
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ venue }}</h5>
+          <p class="card-text">
+            <ul>
+                <strong>Address::</strong> {{ venue.address }}<br/>
+                
+                <!-- Can also access properties of Venue class: -->
+                <strong>Zip Code:</strong> {{ venue.zip_code }}</br> 
+                <strong>Phone Number:</strong> {{ venue.phone }}</br>
+                <strong>Web Site:</strong> <a href='{{ venue.web }}'>{{venue.web}}</a></br>
+                <strong>Email Address:</strong> {{ venue.email_address }}<br/>
+                <strong>Owner:</strong> {{ venue_owner }}<br/>
+                <strong>Owner's email:</strong> {{ venue_owner.email }}<br/>
+            </ul>
+            <br/>
+            {% if venue.venue_image %}
+              <img src='{{ venue.venue_image.url }}' width=500>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </br>
+
+{% if user.is_authenticated %}
+{% if user.id == venue.owner %}
+
+    <a href = "{% url 'update-venue' venue.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
+    <a href = "{% url 'delete-venue' venue.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+
+{% endif %}
+{% endif %}
+
+{% endblock %}

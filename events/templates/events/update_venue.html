@@ -1,0 +1,25 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %} 
+
+    <h1>Update Venue . . . </h1>
+    <br>
+    <!-- enctype="multipart/form-data" allows file upload -->
+    <form action="" method=POST enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br/>
+    <input type="submit" value="Update" class="btn btn-secondary">
+    </form>
+
+{% else %}
+
+<h1>Sorry - you must login to view this page!</h1>
+<br/>
+<a  href="{% url 'login' %}">Login here</a>
+
+{% endif %}
+
+{% endblock %}
